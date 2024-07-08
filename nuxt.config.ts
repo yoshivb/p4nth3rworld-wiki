@@ -12,6 +12,6 @@ export default defineNuxtConfig({
   },
 
   devtools: { enabled: true },
-  modules: ["@formkit/auto-animate/nuxt", "@nuxt/content", "@nuxt/image", "@nuxt/ui"],
+  modules: ["@nuxt/content", "@nuxt/ui", "@nuxtjs/tailwindcss", "@nuxt/icon"],
   compatibilityDate: "2024-07-04",
 });
