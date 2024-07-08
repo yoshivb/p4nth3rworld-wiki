@@ -12,7 +12,7 @@ if (!page.value) {
 </script>
 
 <template>
-    <main class="prose prose-zinc dark:prose-invert prose-h1:text-balance">
+    <main class="prose prose-zinc dark:prose-invert prose-h1:text-balance max-w-none">
         <ContentRenderer v-if="page.body" :value="page" />
     </main>
 </template>

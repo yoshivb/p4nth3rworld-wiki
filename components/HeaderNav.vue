@@ -24,7 +24,7 @@ function convertNavToDropdown(items: NavItem[]|undefined)
 
 <template>
   <header class="flex justify-between items-center mb-6">
-    <nav class="text-xl font-bold flex flex-col sm:flex-row gap-4">
+    <nav class="text-xl font-bold flex flex-row gap-4">
       <div v-for="item in navigation" class="py-2">
         <UDropdown v-if="item.children && item.children.length > 0" :items="convertNavToDropdown(item.children)" :popper="{ placement: 'bottom-start' }">
           <ULink>{{item.title}}<span class="i-heroicons-chevron-down-20-solid"></span></ULink>
