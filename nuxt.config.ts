@@ -2,7 +2,11 @@
 export default defineNuxtConfig({
   runtimeConfig: {
   },
-
+  content: {
+    experimental: {
+      search: true
+    }
+  },
   app: {
     head: {
       htmlAttrs: {

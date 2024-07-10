@@ -20,6 +20,7 @@ useHead({
 <template>
   <HeaderNav />
   <main>
+    <Search/>
     <NuxtRouteAnnouncer />
     <NuxtPage />
   </main>
