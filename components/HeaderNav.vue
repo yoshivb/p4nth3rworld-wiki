@@ -44,7 +44,7 @@ const { metaSymbol } = useShortcuts();
           <UKbd>{{ metaSymbol }}</UKbd>
           <UKbd>K</UKbd>
         </UButton>
-        <UButton class="item-end" @click="navigateTo('https://github.com/yoshivb/p4nth3rworld-wiki',{external: true});">
+        <UButton class="item-end" @click="navigateTo('https://github.com/yoshivb/p4nth3rworld-wiki',{external: true, open:{target: '_blank'}});">
           <Icon name="icon-park-outline:github-one"/>
           <p>Contribute</p>
         </UButton>
