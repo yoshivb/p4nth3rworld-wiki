@@ -2,8 +2,6 @@
 title: 'Mountain'
 ---
 
-# Mountain
-
 ::AsideInfo
 #title
 Mountain

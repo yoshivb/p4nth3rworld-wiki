@@ -2,8 +2,6 @@
 title: 'City'
 ---
 
-# City
-
 ::AsideInfo
 #title
 City

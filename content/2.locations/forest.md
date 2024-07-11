@@ -2,8 +2,6 @@
 title: 'Forest'
 ---
 
-# Forest 
-
 ::AsideInfo
 #title
 Forest

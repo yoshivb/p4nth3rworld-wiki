@@ -2,8 +2,6 @@
 title: 'The 🐥 Invasion'
 ---
 
-# The 🐥 Invasion
-
 On May 17 2024 a mysterious item was found in the mountain, a 🐥 (a.k.a A Front Facing Baby Chick).
 Soon after more were spotted in the desert and other locations.
 Nearby players managed to collect a handful of them over the next few days.

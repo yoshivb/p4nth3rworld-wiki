@@ -2,8 +2,6 @@
 title: 'Swamp'
 ---
 
-# Swamp
-
 ::AsideInfo
 #title
 Swamp

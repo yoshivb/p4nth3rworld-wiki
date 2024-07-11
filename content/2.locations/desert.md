@@ -2,8 +2,6 @@
 title: 'Desert'
 ---
 
-# Desert
-
 ::AsideInfo
 #title
 Desert
