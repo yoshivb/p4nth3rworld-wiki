@@ -1,20 +1,11 @@
 ---
 title: 'Forest'
+asideInfo:
+  - key: "Added"
+    value: "April 26, 2024"
+  - key: "Latest Update"
+    value: "April 26, 2024"
 ---
-
-::AsideInfo
-#title
-Forest
-
-#info
-Added
-
-April 26, 2024
-
-Latest Update
-
-April 26, 2024
-::
 
 The forest is like any other place in P4nth3rworld!
 It's always full of people looking to make it big.

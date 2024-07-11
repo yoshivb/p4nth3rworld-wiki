@@ -26,6 +26,20 @@ useContentHead({
             </UButton>
         </div>
         <div class="prose prose-zinc dark:prose-invert prose-h1:text-balance max-w-none">
+            <aside v-if="page.asideInfo" class="float-right border-2 m-2 border-slate-700 not-prose">
+                <div class="bg-slate-700 font-semibold text-2xl p-2 mb-2">
+                    <h2>{{page.title}}</h2>
+                </div>
+                <div v-if="page.image" class="m-2">
+                    <NuxtImg src="page.image" />
+                </div>
+                <div class="m-2 grid grid-cols-2 gap-3">
+                    <div v-for="item in page.asideInfo" class="grid grid-cols-subgrid col-span-2">
+                        <p>{{item.key}}</p>
+                        <p>{{item.value}}</p>
+                    </div>
+                </div>
+            </aside>
             <ContentRenderer v-if="page.body" :value="page" />
         </div>
     </main>

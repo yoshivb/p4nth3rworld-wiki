@@ -1,20 +1,11 @@
 ---
 title: 'Swamp'
+asideInfo:
+  - key: "Added"
+    value: "May 14, 2024"
+  - key: "Latest Update"
+    value: "May 14, 2024"
 ---
-
-::AsideInfo
-#title
-Swamp
-
-#info
-Added
-
-May 14, 2024
-
-Latest Update
-
-May 14, 2024
-::
 
 The swamp is shrouded in [mystery](/events/swamp-mystery).
 In this location only irradiated, rotten and toxic items spawn, no other normal items.
