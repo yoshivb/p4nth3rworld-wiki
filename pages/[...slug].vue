@@ -14,8 +14,6 @@ useContentHead({
         titleTemplate: () => `${page.value?.title} | P4nth3rworld Wiki`,
     }
 });
-
-console.log(page.value);
 </script>
 
 <template>
