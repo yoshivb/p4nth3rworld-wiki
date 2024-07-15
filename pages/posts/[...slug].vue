@@ -1,7 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  layout: 'docs'
-})
 const route = useRoute()
 const { data: page } = await useAsyncData(`docs-${route.path}`, () => queryContent(route.path).findOne());
 
@@ -16,13 +13,21 @@ useContentHead({
     body: page.value?.body,
     _id: page.value?._id
 });
+
+
+const editUrl = computed(()=> {
+    if(page.value)
+    {
+        return `/admin/#/edit/${page.value._stem}`;
+    }
+})
 </script>
 
 <template>
     <main>
         <div v-if="page && page.title != 'Home'" class="w-full flex flex-row justify-between px-2">
             <h1 class="text-balance font-extrabold text-4xl">{{ page.title }}</h1>
-            <UButton @click="navigateTo(`https://github.com/yoshivb/p4nth3rworld-wiki/tree/main/content/${page?._file}`,{external: true, open:{target: '_blank'}});">
+            <UButton :to="editUrl">
                 <p>Edit</p>
                 <Icon name="icon-park-outline:edit"/>
             </UButton>

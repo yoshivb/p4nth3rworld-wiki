@@ -10,7 +10,6 @@ const content = computed(() => {
 });
 
 function getTextFromVNode(vnode: any) {
-	console.log(vnode);
 	if (typeof vnode.children === 'string') {
 		return vnode.children;
 	} else if (vnode.children?.default) {
