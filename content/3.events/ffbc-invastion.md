@@ -1,5 +1,8 @@
 ---
-title: 'The 🐥 Invasion'
+title: The 🐥 Invasion
+asideInfo:
+  - key: Test
+    value: Preview
 ---
 
 On May 17 2024 a mysterious item was found in the mountain, a 🐥 (a.k.a A Front Facing Baby Chick).
