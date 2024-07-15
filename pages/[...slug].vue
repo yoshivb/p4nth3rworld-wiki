@@ -12,20 +12,22 @@ if (!page.value) {
 useContentHead({
     head: {
         titleTemplate: () => `${page.value?.title} | P4nth3rworld Wiki`,
-    }
+    },
+    body: page.value?.body,
+    _id: page.value?._id
 });
 </script>
 
 <template>
     <main>
-        <div v-if="page.title != 'Home'" class="w-full flex flex-row justify-between px-2">
+        <div v-if="page && page.title != 'Home'" class="w-full flex flex-row justify-between px-2">
             <h1 class="text-balance font-extrabold text-4xl">{{ page.title }}</h1>
             <UButton @click="navigateTo(`https://github.com/yoshivb/p4nth3rworld-wiki/tree/main/content/${page?._file}`,{external: true, open:{target: '_blank'}});">
                 <p>Edit</p>
                 <Icon name="icon-park-outline:edit"/>
             </UButton>
         </div>
-        <div class="prose prose-zinc dark:prose-invert prose-h1:text-balance max-w-none">
+        <div v-if="page" class="prose prose-zinc dark:prose-invert prose-h1:text-balance max-w-none">
             <aside v-if="page.asideInfo" class="float-right border-2 m-2 border-slate-700 not-prose">
                 <div class="bg-slate-700 font-semibold text-2xl p-2 mb-2">
                     <h2>{{page.title}}</h2>
