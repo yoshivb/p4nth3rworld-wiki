@@ -1,6 +1,7 @@
 backend:
   name: github
   repo: yoshivb/p4nth3rworld-wiki
+  branch: main
   open_authoring: true
 
 publish_mode: editorial_workflow
