@@ -11,17 +11,48 @@ media_folder: static/img
 public_folder: /img
 
 collections:
-  - name: 'posts'
-    label: 'Posts'
-    folder: 'content/posts'
+  - name: 'items'
+    label: 'Items'
+    folder: 'content/posts/4.items'
     format: 'frontmatter'
     create: true
     slug: '{{slug}}'
     editor:
       preview: false
-    nested:
-      depth: 3 # max depth to show in the collection tree
-      summary: '{{title}}' # optional summary for a tree node, defaults to the inferred title field
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - label: 'Aside'
+        name: 'asideInfo'
+        widget: 'list'
+        fields:
+          - {label: 'Key', name: 'key', widget: 'text'}
+          - {label: 'Value', name: 'value', widget: 'text'}
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'locations'
+    label: 'Locations'
+    folder: 'content/posts/2.locations'
+    format: 'frontmatter'
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - label: 'Aside'
+        name: 'asideInfo'
+        widget: 'list'
+        fields:
+          - {label: 'Key', name: 'key', widget: 'text'}
+          - {label: 'Value', name: 'value', widget: 'text'}
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'events'
+    label: 'Events'
+    folder: 'content/posts/3.events'
+    format: 'frontmatter'
+    create: true
+    slug: '{{slug}}'
+    editor:
+      preview: false
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - label: 'Aside'

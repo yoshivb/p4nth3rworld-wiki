@@ -2,7 +2,7 @@
 import type { NavItem } from '@nuxt/content';
 const { data: topNavigation } = await useAsyncData('navigation', () => fetchContentNavigation(queryContent("posts")), { default: () => [] });
 
-const navigation = topNavigation.value[0].children;
+let navigation = topNavigation.value[0].children;
 
 function convertNavToDropdown(items: NavItem[]|undefined)
 {
@@ -34,7 +34,7 @@ const { metaSymbol } = useShortcuts();
       <div class="text-xl font-bold flex flex-row gap-4">
         <NuxtLink class="py-2" to="/">Home</NuxtLink>
         <div v-for="item in navigation" class="py-2">
-          <UDropdown v-if="item.children && item.children.length > 0" :items="convertNavToDropdown(item.children)" :popper="{ placement: 'bottom-start' }">
+          <UDropdown v-if="item.children && item.children.length > 1" :items="convertNavToDropdown(item.children)" :popper="{ placement: 'bottom-start' }">
             <ULink>{{item.title}}<span class="i-heroicons-chevron-down-20-solid"></span></ULink>
           </UDropdown>
           <NuxtLink v-else :to="item._path">{{item.title}}</NuxtLink>
