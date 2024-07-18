@@ -8,7 +8,7 @@ if (!page.value) {
 
 useContentHead({
     head: {
-        titleTemplate: () => `${page.value?.title} | P4nth3rworld Wiki`,
+        titleTemplate: () => `${page.value?.title} | p4nth3rworld Wiki`,
     },
     body: page.value?.body,
     _id: page.value?._id
