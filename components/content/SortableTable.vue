@@ -89,7 +89,7 @@ const filteredRows = computed(() => {
 
 	const result =  mappedContent?.rows.filter((person) => {
 		return Object.values(person).some((value) => {
-			return String(value).toLowerCase().includes(filterInput.value.toLowerCase())
+			return getRowValueString(value).toLowerCase().includes(filterInput.value.toLowerCase())
 		})
 	});
 	return result;
@@ -177,6 +177,19 @@ const paginatedRows = computed(()=>{
 
 // --- Stringify Rows --- //
 
+function getRowValueString(rowValue: string|number|Date)
+{
+	if(typeof rowValue === "object")
+	{
+		return `${rowValue.getDate()} ${rowValue.toLocaleString('en-US', {month: 'short'})} ${rowValue.getFullYear()}`;
+	}
+	else if(typeof rowValue === "number")
+	{
+		return rowValue.toString();
+	}
+	return rowValue.toString();
+}
+
 const stringRows = computed(() => {
 	if(paginatedRows.value)
 	{
@@ -184,15 +197,7 @@ const stringRows = computed(() => {
 			const stringRow = Object.assign({}, row);
 			for(let column in props.column_types)
 			{
-				const rowValue = stringRow[column];
-				if(typeof rowValue === "object")
-				{
-					stringRow[column] = `${rowValue.getDate()} ${rowValue.toLocaleString('en-US', {month: 'short'})} ${rowValue.getFullYear()}`;
-				}
-				else if(typeof rowValue === "number")
-				{
-					stringRow[column] = rowValue.toString();
-				}
+				stringRow[column] = getRowValueString(stringRow[column]);
 			}
 			return stringRow;
 		})
