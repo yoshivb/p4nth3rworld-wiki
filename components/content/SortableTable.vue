@@ -24,6 +24,19 @@ const props = defineProps({
 	}
 });
 
+function ArrayToSorted<T>(array: T[], compareFn: (a:T, b:T) => number )
+{
+	if(Array.prototype.toSorted !== undefined)
+	{
+		return array.toSorted(compareFn);
+	}
+	else
+	{
+		const newArray = [...array];
+		return newArray.sort(compareFn);
+	}
+}
+
 // --- Converting Data to UTable data --- //
 const content = slots.default ? slots.default().map(getTextFromVNode) : null;
 function getTextFromVNode(vnode: any) {
@@ -84,7 +97,7 @@ const filteredRows = computed(() => {
 	}
 
 	if (!filterInput.value) {
-		return mappedContent?.rows
+		return mappedContent?.rows;
 	}
 
 	const result =  mappedContent?.rows.filter((person) => {
@@ -114,7 +127,7 @@ if(props.default_sort.direction)
 const sortedRows = computed(()=> {
 	if(filteredRows.value && sort.value)
 	{
-		const result = filteredRows.value.toSorted((rowA, rowB) => {
+		const result = ArrayToSorted(filteredRows.value, ((rowA, rowB) => {
 			const valueA = rowA[sort.value.column];
 			const valueB = rowB[sort.value.column];
 			if(typeof valueA === "object" && typeof valueB === "object")
@@ -150,7 +163,7 @@ const sortedRows = computed(()=> {
 					return valueB.toString().localeCompare(valueA.toString());
 				}
 			}
-		});
+		}));
 		return result;
 	}
 	return [];
