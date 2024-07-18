@@ -12,6 +12,12 @@ const props = defineProps({
 			}
 		}
 	},
+	column_types: {
+		type: Object,
+		default() {
+			return {}
+		}
+	},
 	max_rows: {
 		type: Number,
 		default: 10
@@ -36,7 +42,6 @@ function mapContent() {
 		const header = data[0].flat(3);
 		const rowData = data[1] as string[][][];
 
-		
 		const columns = header.map((item: string) => {
 		return {
 			key: item, 
@@ -44,14 +49,18 @@ function mapContent() {
 			sortable: true};
 		});
 		const rows = rowData.map((entries) => {
-			let result: Record<string, string|number> = {};
+			let result: Record<string, string|number|Date> = {};
 			for(let i = 0; i < entries.length; i ++)
 			{
-				let value:string|number = entries[i][0];
-				let numberValue = parseInt(value);
-				if(!Number.isNaN(numberValue))
+				let value:string|number|Date = entries[i][0];
+				const column_type = props.column_types[header[i]];
+				if(column_type === "Date")
 				{
-					value = numberValue;
+					value = new Date(Date.parse(value));
+				}
+				else if(column_type === "Number")
+				{
+					value = parseInt(value);
 				}
 				result[header[i]] = value;
 			}
@@ -78,11 +87,12 @@ const filteredRows = computed(() => {
 		return mappedContent?.rows
 	}
 
-	return mappedContent?.rows.filter((person) => {
+	const result =  mappedContent?.rows.filter((person) => {
 		return Object.values(person).some((value) => {
 			return String(value).toLowerCase().includes(filterInput.value.toLowerCase())
 		})
-	})
+	});
+	return result;
 });
 
 // --- Sorting --- //
@@ -107,7 +117,18 @@ const sortedRows = computed(()=> {
 		const result = filteredRows.value.toSorted((rowA, rowB) => {
 			const valueA = rowA[sort.value.column];
 			const valueB = rowB[sort.value.column];
-			if(typeof valueA === "number" && typeof valueB === "number")
+			if(typeof valueA === "object" && typeof valueB === "object")
+			{
+				if(sort.value.direction === "asc")
+				{
+					return valueA.getTime() - valueB.getTime();
+				}
+				else
+				{
+					return valueB.getTime() - valueA.getTime();
+				}
+			}
+			else if(typeof valueA === "number" && typeof valueB === "number")
 			{
 				if(sort.value.direction === "asc")
 				{
@@ -152,7 +173,31 @@ const paginatedRows = computed(()=>{
 		}
 	}
 	return [];
-})
+});
+
+// --- Stringify Rows --- //
+
+const stringRows = computed(() => {
+	if(paginatedRows.value)
+	{
+		return paginatedRows.value.map((row) => {
+			const stringRow = Object.assign({}, row);
+			for(let column in props.column_types)
+			{
+				const rowValue = stringRow[column];
+				if(typeof rowValue === "object")
+				{
+					stringRow[column] = `${rowValue.getDate()} ${rowValue.toLocaleString('en-US', {month: 'short'})} ${rowValue.getFullYear()}`;
+				}
+				else if(typeof rowValue === "number")
+				{
+					stringRow[column] = rowValue.toString();
+				}
+			}
+			return stringRow;
+		})
+	}
+});
 
 </script>
 
@@ -160,7 +205,7 @@ const paginatedRows = computed(()=>{
 	<div class="flex justify-end px-3 py-3.5 border-b border-gray-200 dark:border-gray-700">
       <UInput v-model="filterInput" placeholder="Filter..." />
     </div>
-	<UTable :ui="{ base: 'mt-0', td: {padding: 'px-2'}, th: {padding: 'px-2'} }" v-model:sort="sort" :rows="paginatedRows" :columns="mappedContent.columns" sort-mode="manual"  />
+	<UTable :ui="{ base: 'mt-0', td: {padding: 'px-2'}, th: {padding: 'px-2'} }" v-model:sort="sort" :rows="stringRows" :columns="mappedContent.columns" sort-mode="manual"  />
 	<UPagination v-if="maxRows > 0 && (mappedContent?.rows?.length ?? 0) > maxRows"
     v-model="page"
     :ui="{ base: 'ml-auto mt-2' }"
