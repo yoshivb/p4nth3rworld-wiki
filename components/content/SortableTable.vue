@@ -64,6 +64,27 @@ function mapContent() {
 
 const mappedContent = mapContent();
 
+// --- Filtering --- //
+
+const filterInput = ref('');
+
+const filteredRows = computed(() => {
+	if (!mappedContent?.rows)
+	{
+		return [];
+	}
+
+	if (!filterInput.value) {
+		return mappedContent?.rows
+	}
+
+	return mappedContent?.rows.filter((person) => {
+		return Object.values(person).some((value) => {
+			return String(value).toLowerCase().includes(filterInput.value.toLowerCase())
+		})
+	})
+});
+
 // --- Sorting --- //
 
 const sort = ref<{ column: string; direction: "asc" | "desc" }>({
@@ -81,9 +102,9 @@ if(props.default_sort.direction)
 }
 
 const sortedRows = computed(()=> {
-	if(mappedContent?.rows && sort.value)
+	if(filteredRows.value && sort.value)
 	{
-		const result = mappedContent?.rows.toSorted((rowA, rowB) => {
+		const result = filteredRows.value.toSorted((rowA, rowB) => {
 			const valueA = rowA[sort.value.column];
 			const valueB = rowB[sort.value.column];
 			if(typeof valueA === "number" && typeof valueB === "number")
@@ -121,7 +142,7 @@ const maxRows = ref(props.max_rows);
 const paginatedRows = computed(()=>{
 	if(sortedRows.value)
 	{
-		if(maxRows.value > 0)
+		if(maxRows.value > 0 && sortedRows.value.length > maxRows.value)
 		{
 			return sortedRows.value.slice((page.value - 1) * maxRows.value, (page.value) * maxRows.value);
 		}
@@ -136,11 +157,14 @@ const paginatedRows = computed(()=>{
 </script>
 
 <template>
-	<UTable v-model:sort="sort" :rows="paginatedRows" :columns="mappedContent.columns" sort-mode="manual"  />
+	<div class="flex justify-end px-3 py-3.5 border-b border-gray-200 dark:border-gray-700">
+      <UInput v-model="filterInput" placeholder="Filter..." />
+    </div>
+	<UTable :ui="{ base: 'mt-0', td: {padding: 'px-2'}, th: {padding: 'px-2'} }" v-model:sort="sort" :rows="paginatedRows" :columns="mappedContent.columns" sort-mode="manual"  />
 	<UPagination v-if="maxRows > 0 && (mappedContent?.rows?.length ?? 0) > maxRows"
     v-model="page"
     :ui="{ base: 'ml-auto mt-2' }"
-    :total="mappedContent?.rows?.length ?? 0"
+    :total="filteredRows.length"
     :page-count="maxRows"
   />
 </template>
