@@ -6,7 +6,7 @@ asideInfo:
   - key: Latest Update
     value: July 24, 2024
 ---
-The beach is like any other place in p4nth3rworld!
-It's always full of people looking to make it big.
+The beach is the place to be in p4nth3rworld if you want to relax!
+The lovely breeze and the radiant sunshine cannot be beat!
 
-Not much else is known about this place at this very moment.
+The beach is also where you can find many beach only items! Clam shells, driftwood, anemone, you name it! 
