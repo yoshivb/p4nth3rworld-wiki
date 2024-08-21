@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const { data: page } = await useAsyncData(`docs-${route.path}`, () => queryContent(route.path).findOne());
+//console.log(route.path);
 
 if (!page.value) { 
     throw createError({ statusCode: 404, statusMessage: 'Page not found' });
@@ -27,10 +28,16 @@ const editUrl = computed(()=> {
     <main>
         <div v-if="page && page.title != 'Home'" class="w-full flex flex-row justify-between px-2">
             <h1 class="text-balance font-extrabold text-4xl">{{ page.title }}</h1>
-            <UButton :to="editUrl" external>
-                <p>Edit</p>
-                <Icon name="icon-park-outline:edit"/>
-            </UButton>
+            <div class="flex">
+                <UButton :to="editUrl" external>
+                    <p>Edit</p>
+                    <Icon name="icon-park-outline:edit"/>
+                </UButton>
+                <UButton :to="`${route.path}/history`">
+                    <p>History</p>
+                    <Icon name="icon-park-outline:edit"/>
+                </UButton>
+            </div>
         </div>
         <div v-if="page" class="prose prose-zinc dark:prose-invert prose-h1:text-balance max-w-none">
             <aside v-if="page.asideInfo" class="float-right border-2 m-2 border-slate-700 not-prose">
