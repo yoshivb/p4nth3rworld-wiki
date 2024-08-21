@@ -21,6 +21,10 @@ const props = defineProps({
 	max_rows: {
 		type: Number,
 		default: 10
+	},
+	downloadable: {
+		type: Boolean,
+		default: false
 	}
 });
 
@@ -217,11 +221,99 @@ const stringRows = computed(() => {
 	}
 });
 
+// --- Download Content --- //
+
+const csvFile = computed(() => {
+	const columns = mappedContent.columns?.map((columnEntry: any) => {
+		return `"${columnEntry.label}"`;
+	}).join(',');
+	const rows = mappedContent.rows?.map((rowEntry) => {
+		return Object.values(rowEntry).map((item) => {
+			if(item instanceof Date)
+			{
+				return `"${item.toISOString()}"`;
+			}
+			return `"${item.toString()}"`;
+		}).join(",");
+	}).join('\n');
+
+	return `${columns}\n${rows}`;
+});
+
+async function DownloadContent()
+{
+	const suggestedName = 'data.csv';
+
+	const supportsFileSystemAccess =
+	'showSaveFilePicker' in window &&
+	(() => {
+		try {
+		return window.self === window.top;
+		} catch {
+		return false;
+		}
+	})();
+	// If the File System Access API is supported…
+	if (supportsFileSystemAccess) {
+		try {
+			if(csvFile.value)
+			{
+				// create a new handle
+				// @ts-ignore
+				const newHandle = await window.showSaveFilePicker({ 
+					suggestedName,
+					types: [
+						{
+							description: "Comma Seperated Values File",
+							accept: { "text/plain": [".csv"] },
+						},
+					] 
+				});
+
+				// create a FileSystemWritableFileStream to write to
+				const writableStream = await newHandle.createWritable();
+
+				// write our file
+				await writableStream.write(csvFile.value);
+
+				// close the file and write the contents to disk.
+				await writableStream.close();
+			}
+		} catch (err) {
+			console.error(err);
+		}
+	}
+	else
+	{
+		// Fallback if the File System Access API is not supported…
+		// Create the blob URL.
+		const blobURL = URL.createObjectURL(new Blob([csvFile.value], {
+			type: 'text/plain'
+		}))
+		// Create the `<a download>` element and append it invisibly.
+		const a = document.createElement('a');
+		a.href = blobURL;
+		a.download = suggestedName;
+		a.style.display = 'none';
+		document.body.append(a);
+		// Programmatically click the element.
+		a.click();
+		// Revoke the blob URL and remove the element.
+		setTimeout(() => {
+			URL.revokeObjectURL(blobURL);
+			a.remove();
+		}, 1000);
+	}
+}
+
 </script>
 
 <template>
-	<div class="flex justify-end px-3 py-3.5 border-b border-gray-200 dark:border-gray-700">
+	<div class="flex justify-end px-3 gap-2 py-3.5 border-b border-gray-200 dark:border-gray-700">
       <UInput v-model="filterInput" placeholder="Filter..." />
+	  <UButton v-if="downloadable" @click="DownloadContent">
+		<Icon name="icon-park-outline:download"/>
+	  </UButton>
     </div>
 	<UTable :ui="{ base: 'mt-0', td: {padding: 'px-2'}, th: {padding: 'px-2'} }" v-model:sort="sort" :rows="stringRows" :columns="mappedContent.columns" sort-mode="manual"  />
 	<UPagination v-if="maxRows > 0 && (mappedContent?.rows?.length ?? 0) > maxRows"
