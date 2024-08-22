@@ -25,7 +25,7 @@ const editUrl = computed(()=> {
 
 <template>
     <main>
-        <div v-if="page && page.title != 'Home'" class="w-full flex flex-row justify-between px-2">
+        <div v-if="page && page.title != 'Home'" class="w-full flex flex-row justify-between">
             <h1 class="text-balance font-extrabold text-4xl">{{ page.title }}</h1>
             <UButton :to="editUrl" external>
                 <p>Edit</p>

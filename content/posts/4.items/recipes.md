@@ -4,22 +4,62 @@ description: Recipes page
 ---
 You can cook recipes in p4ntherworld using !cook \[primary ingredient\] + \[secondary ingredient(s)\]
 
-::Tabs
-#Marinated green olives
+----
 
-Primary ingredient: Green Olives
+::Cards
+#Marinated Green Olives
 
-Known secondary Ingredient(s): Garlic Bulb, Fresh Green Chilli, Fresh Red Chilli
+**Primary ingredient:**
+- Green Olives
 
-#Nut butter
+**Known secondary Ingredient(s):**
+- Garlic Bulb
+- Fresh Green Chilli
+- Fresh Red Chilli
+- Fresh Basil
+- Fresh Coriander
+- Fresh Sage
+- Fresh Basil
+- Fresh Parsley
+- Fresh Thyme
 
-Primary ingredient: Stick of Butter
+#Nut Butter
 
-Known secondary ingredient(s): Pistachio
+**Primary ingredient:**
+- Stick of Butter
+
+**Known secondary Ingredient(s):**
+- Almond
+- Walnut
+- Hazelnut
+- Pecan Nut
 
 #Pasta and sauce
 
-Primary ingredient: Fresh Pasta
+**Primary ingredient:**
+- Fresh Pasta
 
-Known secondary ingredient(s): Tomato
+**Known secondary Ingredient(s):**
+- Tomato
+- Generic Mushroom
+- Fresh Basil
+- Fresh Coriander
+- Fresh Sage
+- Fresh Basil
+- Fresh Parsley
+- Fresh Thyme
+
+#Red Lentil Concoction
+
+**Primary ingredient:**
+- Red Lentils
+
+**Known secondary Ingredient(s):**
+- Tomato
+- Fresh Basil
+- Fresh Coriander
+- Fresh Sage
+- Fresh Basil
+- Fresh Parsley
+- Fresh Thyme
 ::
