@@ -62,4 +62,14 @@ You can cook recipes in p4ntherworld using !cook \[primary ingredient\] + \[seco
 - Fresh Basil
 - Fresh Parsley
 - Fresh Thyme
+
+#Clam Chowder
+
+**Primary ingredient:**
+- Clam Shell
+
+**Known secondary Ingredient(s):**
+- Sea Salt
+- Whelk Shell
+- Celery Stick
 ::
