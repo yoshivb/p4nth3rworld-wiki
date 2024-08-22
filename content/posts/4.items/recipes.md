@@ -72,4 +72,18 @@ You can cook recipes in p4ntherworld using !cook \[primary ingredient\] + \[seco
 - Sea Salt
 - Whelk Shell
 - Celery Stick
+
+#Mashed avocado (aka guacamole)
+
+**Primary ingredient:**
+- Avocado
+
+**Known secondary Ingredient(s):**
+- Fresh Ginger
+- Fresh Parsley
+- Black Olive
+- Fresh Green Chilli
+- Fresh Red Chilli
+- Garlic Bulb
+- Lemon
 ::
