@@ -18,7 +18,10 @@ useContentHead({
 const editUrl = computed(()=> {
     if(page.value)
     {
-        return `/admin/#/edit/${page.value._stem}`;
+        let edit_path = page.value._stem.split('/').splice(1).map(
+            (item: string, index: number) => { return index === 0 ? item.slice(2) : item }).join('/');
+        console.log(edit_path);
+        return `/admin/#/edit/${edit_path}`;
     }
 })
 </script>
