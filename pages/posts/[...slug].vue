@@ -34,7 +34,7 @@ const editUrl = computed(()=> {
                 <Icon name="icon-park-outline:edit"/>
             </UButton>
         </div>
-        <div v-if="page" class="prose prose-zinc dark:prose-invert prose-h1:text-balance max-w-none">
+        <div v-if="page" class="prose prose-zinc dark:prose-invert prose-h1:text-balance max-w-none prose-li:my-0">
             <aside v-if="page.asideInfo" class="float-right border-2 m-2 border-slate-700 not-prose">
                 <div class="bg-slate-700 font-semibold text-2xl p-2 mb-2">
                     <h2>{{page.title}}</h2>
