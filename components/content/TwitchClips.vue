@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const parentURL="localhost"
+const parentURL="p4nth3rworld-wiki.netlify.app"
 const clips = [
     "RacyCredulousGarbageBigBrother-s2-xpBBpRz97iKv7",
     "CrowdedSilkyOxHeyGirl-n7_yX7xN70UFjSHd",
